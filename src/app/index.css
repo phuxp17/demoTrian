@@ -1,0 +1,74 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORT — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Serif+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORT MUST NEVER BE DELETED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss';
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+@source '../shared';
+
+@theme {
+  --font-sans: 'Be Vietnam Pro', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Noto Serif Display', 'Noto Serif', Georgia, serif;
+
+  --color-heritage: #a52b2b;
+  --color-heritage-deep: #7c1f1f;
+  --color-heritage-ink: #5a1717;
+  --color-heritage-tint: #f3e3dc;
+  --color-ivory: #f6efe2;
+  --color-paper: #fbf7ef;
+  --color-parchment: #efe5d2;
+  --color-ink: #2a211c;
+  --color-ink-soft: #5b4f45;
+  --color-ink-mute: #7a6c60;
+  --color-gold: #a8834a;
+  --color-gold-soft: #d8c398;
+  --color-gold-pale: #ece0c4;
+  --color-line: #e2d6c1;
+  --color-line-strong: #cdbd9f;
+  --color-jade: #3f5d4e;
+
+  --ease-out-heritage: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+html {
+  font-size: 17px;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold-pale);
+  color: var(--color-heritage-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.paper-grain {
+  background-color: var(--color-ivory);
+  background-image: radial-gradient(rgba(120, 90, 50, 0.06) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
