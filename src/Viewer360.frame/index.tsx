@@ -46,7 +46,7 @@ export default function Viewer360(props: Props) {
   const go = (n: number) => { setI((n + SCENES.length) % SCENES.length); setPan(0) }
 
   return (
-    <div ref={root} className="flex h-screen min-h-[600px] flex-col bg-[#14100d] font-sans text-paper">
+    <div ref={root} className="flex h-screen min-h-[600px] flex-col bg-[#14100d] font-sans text-[#f8f1e1]">
       <header className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3 md:px-6">
         <button onClick={() => onNavigate?.('cemetery', { id: cem.id })} className="flex h-11 items-center gap-2 rounded-md px-2 text-gold-pale hover:bg-white/10">
           <ArrowLeft className="h-5 w-5" /> <span className="hidden sm:inline">Về trang nghĩa trang</span>
@@ -96,7 +96,7 @@ export default function Viewer360(props: Props) {
 
         <div className="absolute top-3 right-3 left-3 rounded-md bg-black/65 px-3 py-2.5 backdrop-blur-sm sm:top-4 sm:right-auto sm:left-4 sm:max-w-xs sm:p-4">
           <p className="flex items-center gap-2 font-serif text-base sm:text-lg"><Info className="h-4 w-4 shrink-0 text-gold-soft" />{s.name}</p>
-          <p className="mt-0.5 text-[0.85rem] leading-relaxed text-paper/85 sm:mt-1 sm:text-[0.9rem]">{s.note}</p>
+          <p className="mt-0.5 text-[0.85rem] leading-relaxed text-[#f8f1e1]/85 sm:mt-1 sm:text-[0.9rem]">{s.note}</p>
         </div>
       </div>
 

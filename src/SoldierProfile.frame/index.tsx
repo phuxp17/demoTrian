@@ -8,6 +8,7 @@ import { Breadcrumb, Button, Container, Portrait, SampleNotice, SectionTitle, Ta
 import { OrnamentRule, TempleGate } from '../shared/components/Ornaments'
 import { CEMETERIES, IMG, SOLDIERS } from '../shared/data'
 import type { Navigate } from '../shared/nav'
+import { usePortalSettings } from '../shared/settings'
 
 export const args = {
   soldierIndex: 0,
@@ -23,6 +24,7 @@ type Props = Partial<typeof args> & { onNavigate?: Navigate; recordId?: string }
 
 export default function SoldierProfile(props: Props) {
   const { soldierIndex, candles, onNavigate, recordId } = { ...args, ...props }
+  const { display } = usePortalSettings()
   const s = SOLDIERS.find((x) => x.id === recordId) ?? SOLDIERS[Math.min(Math.max(soldierIndex, 0), SOLDIERS.length - 1)]
   const cemeteryId = CEMETERIES.find((c) => c.name === s.cemetery)?.id
   const [lit, setLit] = useState(false)
@@ -58,14 +60,16 @@ export default function SoldierProfile(props: Props) {
             <Portrait name={s.name} className="mx-auto aspect-[3/4] w-48 md:mx-0 md:w-full" />
             <div className="text-center md:text-left">
               <p className="font-serif text-lg text-gold italic">Tổ quốc ghi công</p>
-              <h1 className="mt-2 font-serif text-[2.6rem] leading-[1.1] font-medium text-heritage-ink md:text-[3.6rem]">Liệt sĩ {s.name}</h1>
+              <h1 className="mt-2 font-serif text-[2.6rem] leading-[1.2] font-medium text-heritage-ink md:text-[3.6rem]">Liệt sĩ {s.name}</h1>
               <p className="mt-4 text-[1.15rem] text-ink-soft">
                 {s.born} – {s.died} · {s.rank} · Quê quán {s.hometown}
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
-                <Button size="lg" onClick={() => setLit(true)} disabled={lit} aria-pressed={lit}>
-                  <Flame className="h-5 w-5" /> {lit ? 'Đã thắp nén tâm hương' : 'Thắp nén tâm hương'}
-                </Button>
+                {display.candle && (
+                  <Button size="lg" onClick={() => setLit(true)} disabled={lit} aria-pressed={lit}>
+                    <Flame className="h-5 w-5" /> {lit ? 'Đã thắp nén tâm hương' : 'Thắp nén hương'}
+                  </Button>
+                )}
                 <Button size="lg" variant="secondary" onClick={() => onNavigate?.('graveMap', { id: s.id })}>
                   <MapPin className="h-5 w-5" /> Xem vị trí phần mộ
                 </Button>

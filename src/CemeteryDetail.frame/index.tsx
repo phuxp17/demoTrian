@@ -30,17 +30,17 @@ export default function CemeteryDetail(props: Props) {
       <SiteHeader active="cemetery" onNavigate={onNavigate} />
 
       <section className="relative">
-        <img src={c.image} alt={`Toàn cảnh ${c.name}`} className="h-[380px] w-full md:h-[500px] object-cover" />
-        <div className="absolute inset-0 bg-heritage-ink/55" />
-        <Container className="absolute inset-x-0 bottom-0 pb-10 text-paper">
-          <div className="[&_*]:text-gold-pale [&_button:hover]:text-white">
+        <img src={c.image} alt={`Toàn cảnh ${c.name}`} className="portal-photo h-[380px] w-full object-cover md:h-[500px]" />
+        <div className="absolute inset-0 bg-[#22120f]/60" />
+        <Container className="absolute inset-x-0 bottom-0 pb-10 text-[var(--portal-on-dark)]">
+          <div className="[&_*]:text-[var(--portal-on-dark-soft)] [&_button:hover]:text-white">
             <Breadcrumb items={[{ label: 'Trang chủ', onClick: () => onNavigate?.('home') }, { label: 'Nghĩa trang', onClick: () => onNavigate?.('cemeteries') }, { label: c.name }]} />
           </div>
-          <h1 className="mt-4 max-w-3xl font-serif text-[2.4rem] leading-[1.1] font-medium md:text-[3.4rem]">{c.name}</h1>
-          <p className="mt-3 flex items-center gap-2 text-[1.05rem] text-gold-pale"><MapPin className="h-4 w-4" />{c.address}</p>
+          <h1 className="mt-4 max-w-3xl font-serif text-[2.4rem] leading-[1.2] font-medium md:text-[3.4rem]">{c.name}</h1>
+          <p className="mt-3 flex items-center gap-2 text-[1.05rem] text-[var(--portal-on-dark-soft)]"><MapPin className="h-4 w-4" />{c.address}</p>
         </Container>
       </section>
-      <MeanderBand className="text-gold/50" height={12} />
+      <MeanderBand gilt className="text-gold/50" height={12} />
 
       <Container className="grid gap-12 py-14 lg:grid-cols-12 lg:gap-16">
         <div className="min-w-0 lg:col-span-8">

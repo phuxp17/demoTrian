@@ -2,6 +2,8 @@
 import React, { type ComponentType, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 
+const AdminDashboard = React.lazy(() => import('../admin'))
+
 declare global {
   interface ImportMeta {
     glob(
@@ -53,6 +55,13 @@ if (embedded) {
 export function Root() {
   useReportBackground()
   const path = window.location.pathname
+  if (path === '/admin' || path === '/admin/') {
+    return (
+      <React.Suspense fallback={<p role="status" className="p-6 text-sm">Đang tải trang quản trị…</p>}>
+        <AdminDashboard />
+      </React.Suspense>
+    )
+  }
   const take = takeAfter(path)
   if (take) {
     const modules = take.kind === 'frames' ? frameTakes : prototypeTakes

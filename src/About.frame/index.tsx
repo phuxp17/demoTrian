@@ -7,6 +7,7 @@ import { ArchImage } from '../shared/components/Ornaments'
 import { Button, Container, SampleNotice, SectionTitle } from '../shared/components/ui'
 import { CEMETERIES, IMG } from '../shared/data'
 import type { Navigate } from '../shared/nav'
+import { usePortalSettings } from '../shared/settings'
 
 export const args = {
   showContact: true,
@@ -27,6 +28,7 @@ const MILESTONES = [
 
 export default function About(props: Props) {
   const { showContact, onNavigate } = { ...args, ...props }
+  const { contact } = usePortalSettings()
   const graves = CEMETERIES.reduce((s, c) => s + c.graves, 0)
   const identified = CEMETERIES.reduce((s, c) => s + c.identified, 0)
 
@@ -85,12 +87,12 @@ export default function About(props: Props) {
             <SampleNotice className="mt-6" />
           </div>
           {showContact && (
-            <div className="rounded-md bg-ivory p-6 md:p-8">
-              <h2 className="font-serif text-[1.5rem] text-heritage-ink">Ban quản lý cổng thông tin</h2>
+            <div className="portal-gilt-card rounded-[16px] p-6 md:p-8">
+              <h2 className="font-serif text-[1.5rem] font-semibold text-heritage-ink">Ban quản lý cổng thông tin</h2>
               <ul className="mt-5 flex flex-col gap-4 text-[1rem]">
-                <li className="flex gap-3"><MapPin className="mt-0.5 h-5 w-5 shrink-0 text-gold" /> UBND xã Thư Lâm, TP. Hà Nội</li>
-                <li className="flex gap-3"><Phone className="mt-0.5 h-5 w-5 shrink-0 text-gold" /> Đang cập nhật số điện thoại</li>
-                <li className="flex gap-3"><Mail className="mt-0.5 h-5 w-5 shrink-0 text-gold" /> Đang cập nhật địa chỉ thư</li>
+                <li className="flex gap-3"><MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[var(--portal-gold-icon)]" /> {contact.address}</li>
+                <li className="flex gap-3"><Phone className="mt-0.5 h-5 w-5 shrink-0 text-[var(--portal-gold-icon)]" /> {contact.phone}</li>
+                <li className="flex gap-3"><Mail className="mt-0.5 h-5 w-5 shrink-0 text-[var(--portal-gold-icon)]" /> {contact.email}</li>
               </ul>
               <Button className="mt-7" onClick={() => onNavigate?.('library')}>Góp tư liệu <ArrowRight className="h-4 w-4" /></Button>
             </div>

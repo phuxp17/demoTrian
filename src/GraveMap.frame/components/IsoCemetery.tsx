@@ -4,6 +4,7 @@ import { Minus, Plus } from 'lucide-react'
 import type { Soldier } from '../../shared/data'
 
 export type Layout = { rows: number; perRow: number }
+export type Site = ReturnType<typeof buildSite>
 
 type Props = {
   layout: Layout
@@ -512,7 +513,7 @@ export const MEM_Y = 3.6
 export const AISLE = 1.05
 const SLAB = 0.7
 const LIP = 0.14 // viền cỏ trên mép sa bàn
-const PW = 0.36 // nửa bề rộng nấm mộ
+export const PW = 0.36 // nửa bề rộng nấm mộ
 export const PL = 0.62 // nửa chiều dài nấm mộ
 const PH = 0.2
 const HH = 0.9 // chiều cao bia

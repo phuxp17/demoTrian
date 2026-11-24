@@ -66,7 +66,7 @@ export default function Biography(props: Props) {
 
         <article className="min-w-0 md:col-span-7 lg:col-span-8">
           <Tag tone="red">{m.category}</Tag>
-          <h1 className="mt-4 font-serif text-[2.6rem] leading-[1.1] font-medium text-heritage-ink lg:text-[3.4rem]">
+          <h1 className="mt-4 font-serif text-[2.6rem] leading-[1.2] font-medium text-heritage-ink lg:text-[3.4rem]">
             {m.category === 'Bà mẹ Việt Nam Anh hùng' ? `Mẹ ${m.name}` : m.name}
           </h1>
           <p className="mt-3 text-[1.15rem] text-ink-soft">{m.years} · {m.hometown}</p>

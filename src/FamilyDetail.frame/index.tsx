@@ -35,7 +35,7 @@ export default function FamilyDetail(props: Props) {
           <div>
             <Breadcrumb items={[{ label: 'Trang chủ', onClick: () => onNavigate?.('home') }, { label: 'Địa chỉ gia đình', onClick: () => onNavigate?.('families') }, { label: f.head }]} />
             <Tag tone="red" className="mt-6">{f.kind}</Tag>
-            <h1 className="mt-3 font-serif text-[2.4rem] leading-[1.1] font-medium text-heritage-ink md:text-[3.2rem]">{f.head}</h1>
+            <h1 className="mt-3 font-serif text-[2.4rem] leading-[1.2] font-medium text-heritage-ink md:text-[3.2rem]">{f.head}</h1>
             <p className="mt-4 flex items-center gap-2 text-[1.05rem] text-ink-soft"><MapPin className="h-5 w-5 text-gold" />{f.address}</p>
           </div>
           <ArchImage src={IMG.home} alt="Ngôi nhà của gia đình" className="hidden aspect-[4/5] w-full md:block" />

@@ -43,7 +43,7 @@ export default function RedAddressDetail(props: Props) {
         <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <Tag tone="red">{r.kind}</Tag>
-            <h1 className="mt-4 font-serif text-[2.4rem] leading-[1.1] font-medium text-heritage-ink md:text-[3.4rem]">{r.name}</h1>
+            <h1 className="mt-4 font-serif text-[2.4rem] leading-[1.2] font-medium text-heritage-ink md:text-[3.4rem]">{r.name}</h1>
           </div>
           <p className="flex items-center gap-2 text-[1.05rem] text-ink-soft lg:col-span-4 lg:justify-end"><MapPin className="h-5 w-5 text-gold" />{r.address}</p>
         </div>

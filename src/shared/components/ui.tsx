@@ -10,13 +10,13 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Button({ variant = 'primary', size = 'md', className, children, ...rest }: ButtonProps) {
   const base =
-    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-semibold transition-[background-color,color,border-color,transform] duration-150 ease-out active:scale-[0.98] disabled:opacity-50'
+    'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] font-semibold transition-[background-color,color,border-color,transform,filter,box-shadow] duration-150 ease-out active:scale-[0.98] disabled:opacity-50'
   const sizes = { md: 'h-11 px-5 text-[0.95rem]', lg: 'h-13 px-7 text-base' }
   const variants = {
-    primary: 'bg-heritage text-white hover:bg-heritage-deep',
-    secondary: 'border border-heritage/40 bg-paper text-heritage hover:border-heritage hover:bg-heritage-tint',
+    primary: 'portal-btn-primary',
+    secondary: 'portal-btn-secondary',
     ghost: 'text-heritage hover:bg-heritage-tint',
-    light: 'bg-paper text-heritage-ink hover:bg-gold-pale',
+    light: 'portal-gold-badge hover:brightness-105',
   }
   return (
     <button className={twMerge(base, sizes[size], variants[variant], className)} {...rest}>
@@ -43,8 +43,15 @@ export function SectionTitle({
     <div className={twMerge('flex flex-col gap-4 md:flex-row md:items-end md:justify-between', center && 'items-center text-center md:flex-col md:items-center')}>
       <div className={twMerge('max-w-2xl', center && 'mx-auto')}>
         <OrnamentRule className={twMerge('mb-4 text-gold', center && 'justify-center')} />
-        <h2 className={twMerge('font-serif text-[1.75rem] leading-tight font-medium text-balance sm:text-3xl md:text-[2.5rem]', tone === 'dark' ? 'text-ink' : 'text-paper')}>{title}</h2>
-        {lead && <p className={twMerge('mt-3 text-[1.05rem] leading-relaxed', tone === 'dark' ? 'text-ink-soft' : 'text-gold-pale')}>{lead}</p>}
+        <h2
+          className={twMerge(
+            'font-serif text-[1.75rem] leading-tight font-semibold text-balance sm:text-3xl md:text-[2.5rem]',
+            tone === 'dark' ? 'text-heritage-ink' : 'text-[var(--portal-on-dark)]',
+          )}
+        >
+          {title}
+        </h2>
+        {lead && <p className={twMerge('mt-3 text-[1.05rem] leading-relaxed', tone === 'dark' ? 'text-ink-soft' : 'text-[var(--portal-on-dark-soft)]')}>{lead}</p>}
       </div>
       {action && <div className="shrink-0">{action}</div>}
     </div>
@@ -76,12 +83,12 @@ export function Breadcrumb({ items }: { items: { label: string; onClick?: () => 
 
 export function Tag({ children, tone = 'gold', className }: { children: React.ReactNode; tone?: 'gold' | 'red' | 'jade' | 'plain'; className?: string }) {
   const tones = {
-    gold: 'bg-gold-pale text-heritage-ink',
-    red: 'bg-heritage-tint text-heritage-deep',
-    jade: 'bg-[#e1e8e1] text-jade',
+    gold: 'portal-gold-badge',
+    red: 'bg-heritage-tint text-heritage-ink border border-heritage/15',
+    jade: 'bg-jade-tint text-jade-deep border border-jade/20',
     plain: 'border border-line text-ink-soft',
   }
-  return <span className={twMerge('inline-flex items-center gap-1 whitespace-nowrap rounded-sm px-2 py-0.5 text-[0.8rem] font-medium', tones[tone], className)}>{children}</span>
+  return <span className={twMerge('inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-[0.8rem] font-medium', tones[tone], className)}>{children}</span>
 }
 
 /** Portrait frame for records that have no verified photograph yet. */
@@ -89,14 +96,14 @@ export function Portrait({ name, className, arch = true }: { name: string; class
   return (
     <div
       className={twMerge(
-        'relative flex flex-col items-center justify-center overflow-hidden border border-gold-soft bg-parchment text-ink-mute',
-        arch ? 'rounded-t-[999px]' : 'rounded-md',
+        'portal-portrait-mat relative flex flex-col items-center justify-center overflow-hidden text-ink-mute',
+        arch ? 'rounded-t-[999px]' : 'rounded-xl',
         className,
       )}
       role="img"
       aria-label={`Chân dung ${name} — chưa có ảnh`}
     >
-      <div className={twMerge('pointer-events-none absolute inset-2 border border-gold-soft/70', arch ? 'rounded-t-[999px]' : 'rounded-sm')} />
+      <div className={twMerge('pointer-events-none absolute inset-2 border border-gold-soft/75', arch ? 'rounded-t-[999px]' : 'rounded-lg')} />
       <User className="h-1/3 w-1/3 max-h-16 max-w-16 text-gold" strokeWidth={1} />
       <span className="mt-2 px-3 text-center text-[0.75rem] leading-snug">Ảnh đang cập nhật</span>
     </div>
@@ -111,7 +118,7 @@ export function SelectField({ label, options, value, onChange, className }: { la
         <select
           value={value}
           onChange={(e) => onChange?.(e.target.value)}
-          className="h-12 w-full appearance-none rounded-md border border-line-strong bg-paper pr-10 pl-3.5 text-[0.95rem] text-ink focus:border-heritage focus:outline-none"
+          className="h-12 w-full appearance-none rounded-[10px] border border-line-strong bg-paper pr-10 pl-3.5 text-[0.95rem] text-ink focus:border-heritage focus:outline-none"
         >
           {options.map((o) => (
             <option key={o}>{o}</option>
@@ -133,7 +140,7 @@ export function TextField({ label, placeholder, value, onChange, className, icon
           value={value}
           onChange={(e) => onChange?.(e.target.value)}
           placeholder={placeholder}
-          className={twMerge('h-12 w-full rounded-md border border-line-strong bg-paper pr-3.5 text-[0.95rem] text-ink placeholder:text-ink-mute focus:border-heritage focus:outline-none', icon ? 'pl-11' : 'pl-3.5')}
+          className={twMerge('h-12 w-full rounded-[10px] border border-line-strong bg-paper pr-3.5 text-[0.95rem] text-ink placeholder:text-ink-mute focus:border-heritage focus:outline-none', icon ? 'pl-11' : 'pl-3.5')}
         />
       </span>
     </label>
@@ -146,7 +153,7 @@ export function Pagination({ page = 1, total = 5, onChange }: { page?: number; t
   const go = (p: number) => onChange?.(Math.min(Math.max(p, 1), total))
   return (
     <nav aria-label="Phân trang" className="flex flex-wrap items-center justify-center gap-1.5">
-      <button onClick={() => go(page - 1)} disabled={page <= 1} className="flex h-11 w-11 items-center justify-center rounded-md border border-line text-ink-soft hover:border-heritage hover:text-heritage disabled:pointer-events-none disabled:opacity-40" aria-label="Trang trước">
+      <button onClick={() => go(page - 1)} disabled={page <= 1} className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-line text-ink-soft hover:border-heritage hover:text-heritage disabled:pointer-events-none disabled:opacity-40" aria-label="Trang trước">
         <ChevronLeft className="h-4 w-4" />
       </button>
       {Array.from({ length: total }).map((_, i) => (
@@ -155,14 +162,14 @@ export function Pagination({ page = 1, total = 5, onChange }: { page?: number; t
           onClick={() => go(i + 1)}
           aria-current={i + 1 === page ? 'page' : undefined}
           className={twMerge(
-            'h-11 min-w-11 rounded-md px-3 text-[0.95rem] font-medium',
-            i + 1 === page ? 'bg-heritage text-white' : 'text-ink-soft hover:bg-heritage-tint hover:text-heritage',
+            'h-11 min-w-11 rounded-[10px] px-3 text-[0.95rem] font-medium',
+            i + 1 === page ? 'portal-btn-primary' : 'text-ink-soft hover:bg-heritage-tint hover:text-heritage',
           )}
         >
           {i + 1}
         </button>
       ))}
-      <button onClick={() => go(page + 1)} disabled={page >= total} className="flex h-11 w-11 items-center justify-center rounded-md border border-line text-ink-soft hover:border-heritage hover:text-heritage disabled:pointer-events-none disabled:opacity-40" aria-label="Trang sau">
+      <button onClick={() => go(page + 1)} disabled={page >= total} className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-line text-ink-soft hover:border-heritage hover:text-heritage disabled:pointer-events-none disabled:opacity-40" aria-label="Trang sau">
         <ChevronRight className="h-4 w-4" />
       </button>
     </nav>
@@ -171,7 +178,7 @@ export function Pagination({ page = 1, total = 5, onChange }: { page?: number; t
 
 export function SampleNotice({ className }: { className?: string }) {
   return (
-    <p className={twMerge('flex items-start gap-2 rounded-md border border-gold-soft bg-gold-pale/50 px-4 py-3 text-[0.88rem] leading-relaxed text-ink-soft', className)}>
+    <p className={twMerge('flex items-start gap-2 rounded-[10px] border border-gold-soft/75 bg-ivory px-4 py-3 text-[0.88rem] leading-relaxed text-ink-soft', className)}>
       <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
       <span>Thông tin hiển thị là dữ liệu minh hoạ, đang chờ đối chiếu với hồ sơ chính thức của cơ quan chức năng. Thân nhân có thể gửi đính chính qua mục Góp tư liệu.</span>
     </p>

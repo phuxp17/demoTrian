@@ -102,10 +102,10 @@ export default function News(props: Props) {
                 ))}
               </ol>
             </section>
-            <section className="rounded-md bg-heritage-ink p-6 text-gold-pale">
-              <h2 className="font-serif text-[1.35rem] text-paper">Ngày 27/7 sắp tới</h2>
+            <section className="portal-map-band rounded-[14px] border border-[var(--portal-nav-border)] p-6 text-[var(--portal-on-dark-soft)]">
+              <h2 className="font-serif text-[1.35rem] font-semibold text-[var(--portal-on-dark)]">Ngày 27/7 sắp tới</h2>
               <p className="mt-2 text-[0.95rem] leading-relaxed">Lịch dâng hương tại các nghĩa trang và hướng dẫn đăng ký viếng cho thân nhân ở xa.</p>
-              <button onClick={() => onNavigate?.('article', event ? { id: event.id } : undefined)} className="mt-4 inline-flex items-center gap-1.5 font-semibold text-paper underline-offset-4 hover:underline">
+              <button onClick={() => onNavigate?.('article', event ? { id: event.id } : undefined)} className="mt-4 inline-flex items-center gap-1.5 font-semibold text-[var(--portal-nav-accent)] underline-offset-4 hover:underline">
                 Xem lịch <ArrowRight className="h-4 w-4" />
               </button>
             </section>

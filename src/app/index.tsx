@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Wrench } from 'lucide-react'
 import type { NavParams, PageKey } from '../shared/nav'
+import { applyPortalAttributes, usePortalSettings } from '../shared/settings'
 
 import Home from '../Home.frame'
 import About from '../About.frame'
@@ -61,6 +63,12 @@ const keyForId = (id?: string): PageKey => {
 export default function TriAnThuLam(props: { start?: string }) {
   const [route, setRoute] = useState<{ page: PageKey; params: NavParams; n: number }>(() => ({ page: keyForId(props.start), params: {}, n: 0 }))
   const top = useRef<HTMLDivElement>(null)
+  const settings = usePortalSettings()
+
+  useEffect(() => {
+    applyPortalAttributes(settings.display, true)
+    document.title = settings.display.siteTitle
+  }, [settings.display])
 
   useEffect(() => {
     top.current?.scrollIntoView({ block: 'start' })
@@ -68,6 +76,24 @@ export default function TriAnThuLam(props: { start?: string }) {
   }, [route.n])
 
   const navigate = (page: PageKey, params: NavParams = {}) => setRoute((r) => ({ page, params, n: r.n + 1 }))
+
+  if (settings.data.maintenance) {
+    return (
+      <div className="flex min-h-dvh flex-col items-center justify-center bg-paper px-6 py-16 text-center font-sans text-ink">
+        <div className="portal-gilt-card max-w-lg rounded-[18px] p-8 sm:p-10">
+          <span className="portal-gold-badge mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full">
+            <Wrench className="h-6 w-6" />
+          </span>
+          <h1 className="font-serif text-3xl font-semibold text-heritage-ink">{settings.display.siteTitle} đang bảo trì</h1>
+          <p className="mt-3 leading-relaxed text-ink-soft">{settings.data.maintenanceMessage}</p>
+          <p className="mt-4 text-sm text-ink-mute">{settings.contact.orgName} · {settings.contact.phone}</p>
+          <a href="/admin" className="portal-btn-primary mt-7 inline-flex h-11 items-center rounded-[10px] px-5 text-sm font-semibold">
+            Vào trang quản trị
+          </a>
+        </div>
+      </div>
+    )
+  }
 
   // Only pass what the link carried, so a frame's own args still fill the rest.
   const extra: Record<string, string> = {}
